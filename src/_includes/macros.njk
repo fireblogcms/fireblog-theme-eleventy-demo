@@ -1,0 +1,21 @@
+{% macro metadata(title, description, url, image, siteName, type="website" ) %}
+  <title> {{title}} </title>
+  <link rel="canonical" href="{{ url }}" itemprop="url"/>
+  <meta name="description" content="{{ description }}"/>
+  <meta property="og:site_name" content="{{siteName}}"/>
+  <meta property="og:url" content="{{ url }}"/>
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="{{ image }}"/>
+  <meta property="og:description" content="{{ description}}"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="{{ title }}"/>
+  <meta name="twitter:description" content="{{ description }}"/>
+  <meta name="twitter:image" content="{{ image }}"/>
+  {# https://dev.twitter.com/web/overview/widgets-webpage-properties#csp #}
+  <meta name="twitter:widgets:csp" content="on"/>
+  {#
+  https://developers.facebook.com/docs/sharing/best-practices?locale=fr_FR#images
+  https://developers.facebook.com/tools/debug/sharing/
+  #}
+{% endmacro %}

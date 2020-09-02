@@ -1,0 +1,56 @@
+---
+pagination:
+  data: data.posts
+  size: 1
+  alias: post
+permalink: "post/{{ post.slug }}/"
+---
+{% extends 'layout.njk' %}
+{% import "macros.njk" as macros %}
+
+{% block head %}
+    {{
+      macros.metadata(
+        title = post.title,
+        description = post.teaser,
+        url = process.env.SITE_URL + page.url,
+        siteName = data.blog.name,
+        image = post.image.url
+      )
+    }}
+{% endblock %}
+
+{% block content %}
+  <div class="h-almost-full relative">
+    <img class="absolute inset-y-0" src="{{ post.imagePostPage.url }}" loading="lazy">
+  </div>
+  <div class="post-detail">
+    <h1 class="title is-1">{{ post.title }}</h1>
+    <div class="date">
+      <small>
+        <span class="date-clock">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
+          </svg>
+        </span>{{ post.publishedAt | date_to_long_string }}</small>
+    </div>
+    <div class="post-image">
+      <img width="850px" height="500px" src="{{ post.imagePostPage.url }}" loading="lazy">
+    </div>
+    <div class="content">
+      {{ post.content | safe }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.iframe.ly/embed.js?api_key={{process.env.IFRAMELY_API_KEY}}"></script>
+  <script>
+    // display rich links preview with iframely, if here is a iframely key
+    if (window.iframely && "{{process.env.IFRAMELY_API_KEY}}".trim().length > 0) {
+      document.querySelectorAll("oembed[url]").forEach(element => {
+        window.iframely.load(element, element.attributes.url.value);
+      });
+    }
+  </script>
+{% endblock %}

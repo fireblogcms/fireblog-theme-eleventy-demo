@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="{{ config.lang }}" class="no-js">
+
+  <head{% if page.url == "/" %} itemscope itemtype="https://schema.org/WebSite"{% endif %}>
+    {# charset and viewport first: https://www.nateberkopec.com/2015/10/21/hacking-head-tags-for-speed-and-profit.html #}
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <meta name="generator" content="Eleventy">
+    <link rel="icon" type="image/jpeg" href="/favicon.ico"/>
+    <link rel='preload' as='style' href='/assets/css/styles.css'/>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="apple-touch-icon" href="/favicon.ico"/>
+    {# https://timkadlec.com/remembers/2018-06-06-web-watch/ #}
+    <meta name="disabled-adaptations" content="watch"/>
+    {# Theme color: https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android #}
+    <meta name="theme-color" content="#663399">
+    {% include "inlineJS.njk" %}
+    {% block head %} {% endblock %}
+  </head>
+
+  {% set section = section[1] | replace('index.html', 'home') %}
+  <body
+    itemscope
+    itemtype="https://schema.org/{% if "about/" in page.inputPath %}aboutpage{% else %}webpage{% endif %}"
+    class="layout section-{{ section }}"
+  >
+    <header class="sticky top-0 bg-white border-b border-gray-300 h-20 flex items-center" id="header" role="banner">
+      <div class="container mx-auto">
+        <div class="flex justify-between items-center">
+          <div>
+            {% if page.url === "/" %}
+              <h1 class="text-xl font-bold">{{ data.blog.name }}</h1>
+            {% else %}
+              <div class="text-xl font-bold">
+                <a href="/">{{ data.blog.name }}</a>
+              </div>
+            {% endif %}
+          </div>
+          <div>
+            {% for menuLink in config.menuLinks %}
+              <a class="px-2" href="{{menuLink.href}}">{{ menuLink.title }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" role="main">
+      {% block content %} {% endblock %}
+    </main>
+
+    <section class="container mx-auto">
+      <div class="my-10 flex justify-between items-center">
+        <h3 class="text-xl font-bold">{{ config.followUsText }}</h3>
+        <ul class="flex items-center">
+          {% if config.socials.linkedin %}
+            <li class="w-12 mx-1">
+              <a href="{{ config.socials.linkedin }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-linkedin.svg" alt="" loading="lazy"></a>
+            </li>
+          {% endif %}
+
+          {%if config.socials.twitter %}
+            <li class="w-12 mx-1">
+              <a href="{{ config.socials.twitter }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-twitter.svg" alt="" loading="lazy"></a>
+            </li>
+          {% endif %}
+
+          {% if config.socials.instagram %}
+            <li class="w-12 mx-1">
+              <a href="{{ config.socials.instagram }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-instagram.svg" alt="" loading="lazy"></a>
+            </li>
+          {% endif %}
+
+          {% if config.socials.facebook %}
+            <li class="w-12 mx-1">
+              <a href="{{ config.socials.facebook }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-facebook.svg" alt="" loading="lazy"></a>
+            </li>
+          {% endif %}
+
+          {% if config.socials.youtube %}
+            <li class="w-12 mx-1">
+              <a href="{{ config.socials.youtube }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-youtube.svg" alt="" loading="lazy"></a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </section>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
