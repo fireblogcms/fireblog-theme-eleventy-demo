@@ -78,7 +78,11 @@ async function getPosts({last, before }) {
               url
               alt
             }
-            imagePostRecent:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
+            imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
+              url
+              alt
+            }
+            imagePostRecent:image(w:100, h:100, fit:crop, auto:[compress,format]) {
               url
               alt
             }

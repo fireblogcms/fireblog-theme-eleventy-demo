@@ -13,8 +13,8 @@ module.exports = {
       href:"https://fireblogcms.com",
     }
   ],
-  readMoreText: "Read more",
-  followUsText: "Follow us",
+  recentPostsText: "Recent Posts",
+  followUsText: "Follow Us",
   // links to your social accounts.
   // Use an empty string as value to disable a specific social network
   socials: {
