@@ -3,6 +3,15 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* Burger menu */
+.burger-menu input ~ ul {
+  display: none;
+}
+.burger-menu input:checked ~ ul {
+  display: block;
+}
+
+/* Post content */
 .ck-content li + li {
   margin-top: 0.25em;
 }

@@ -25,9 +25,9 @@
     class="layout section-{{ section }}"
   >
     <header class="sticky top-0 bg-white border-b border-gray-300 text-primary h-20 flex items-center" id="header" role="banner">
-      <div class="container mx-auto">
+      <div class="container mx-auto px-4 md:px-0">
         <div class="flex justify-between items-center">
-          <div class="w-1/3 md:w-auto">
+          <div class="w-3/4 md:w-auto">
             {% if page.url === "/" %}
               <h1 class="text-xl font-bold truncate">{{ data.blog.name }}</h1>
             {% else %}
@@ -36,7 +36,26 @@
               </div>
             {% endif %}
           </div>
-          <div>
+          <div class="burger-menu md:hidden relative">
+            <svg class="h-8 w-8 fill-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <path d="M2 6h28v6h-28zM2 14h28v6h-28zM2 22h28v6h-28z"></path>
+            </svg>
+            <input
+              type="checkbox"
+              class="opacity-0 absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2 scale-250"
+            />
+            <ul
+              class="absolute w-screen bg-white border-b border-gray-300"
+              style="top: calc(100% + 1rem); right: -1rem"
+            >
+              {% for menuLink in config.menuLinks %}
+                <li class="p-2">
+                  <a href="{{menuLink.href}}">{{ menuLink.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="hidden md:block">
             {% for menuLink in config.menuLinks %}
               <a class="px-2" href="{{menuLink.href}}">{{ menuLink.title }}</a>
             {% endfor %}
@@ -49,36 +68,36 @@
       {% block content %} {% endblock %}
     </main>
 
-    <section class="container mx-auto">
+    <section class="container mx-auto px-4 md:px-0">
       <div class="my-10 flex justify-between items-center">
         <h3 class="text-xl font-bold">{{ config.followUsText }}</h3>
         <ul class="flex items-center">
           {% if config.socials.linkedin %}
-            <li class="w-6 md:w-12 mx-1">
+            <li class="w-6 md:w-10 mx-1">
               <a href="{{ config.socials.linkedin }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-linkedin.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {%if config.socials.twitter %}
-            <li class="w-6 md:w-12 mx-1">
+            <li class="w-6 md:w-10 mx-1">
               <a href="{{ config.socials.twitter }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-twitter.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {% if config.socials.instagram %}
-            <li class="w-6 md:w-12 mx-1">
+            <li class="w-6 md:w-10 mx-1">
               <a href="{{ config.socials.instagram }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-instagram.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {% if config.socials.facebook %}
-            <li class="w-6 md:w-12 mx-1">
+            <li class="w-6 md:w-10 mx-1">
               <a href="{{ config.socials.facebook }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-facebook.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {% if config.socials.youtube %}
-            <li class="w-6 md:w-12 mx-1">
+            <li class="w-6 md:w-10 mx-1">
               <a href="{{ config.socials.youtube }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-youtube.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
