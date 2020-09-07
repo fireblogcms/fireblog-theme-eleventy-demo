@@ -24,14 +24,14 @@
     itemtype="https://schema.org/{% if "about/" in page.inputPath %}aboutpage{% else %}webpage{% endif %}"
     class="layout section-{{ section }}"
   >
-    <header class="sticky top-0 bg-white border-b border-gray-300 h-20 flex items-center z-10" id="header" role="banner">
+    <header class="sticky top-0 bg-white border-b border-gray-300 text-primary h-20 flex items-center" id="header" role="banner">
       <div class="container mx-auto">
         <div class="flex justify-between items-center">
-          <div>
+          <div class="w-1/3 md:w-auto">
             {% if page.url === "/" %}
-              <h1 class="text-xl font-bold">{{ data.blog.name }}</h1>
+              <h1 class="text-xl font-bold truncate">{{ data.blog.name }}</h1>
             {% else %}
-              <div class="text-xl font-bold">
+              <div class="text-xl font-bold truncate">
                 <a href="/">{{ data.blog.name }}</a>
               </div>
             {% endif %}
@@ -54,31 +54,31 @@
         <h3 class="text-xl font-bold">{{ config.followUsText }}</h3>
         <ul class="flex items-center">
           {% if config.socials.linkedin %}
-            <li class="w-12 mx-1">
+            <li class="w-6 md:w-12 mx-1">
               <a href="{{ config.socials.linkedin }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-linkedin.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {%if config.socials.twitter %}
-            <li class="w-12 mx-1">
+            <li class="w-6 md:w-12 mx-1">
               <a href="{{ config.socials.twitter }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-twitter.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {% if config.socials.instagram %}
-            <li class="w-12 mx-1">
+            <li class="w-6 md:w-12 mx-1">
               <a href="{{ config.socials.instagram }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-instagram.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {% if config.socials.facebook %}
-            <li class="w-12 mx-1">
+            <li class="w-6 md:w-12 mx-1">
               <a href="{{ config.socials.facebook }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-facebook.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
 
           {% if config.socials.youtube %}
-            <li class="w-12 mx-1">
+            <li class="w-6 md:w-12 mx-1">
               <a href="{{ config.socials.youtube }}" rel="noopener noreferrer" target="_blank"><img src="/assets/images/icon-youtube.svg" alt="" loading="lazy"></a>
             </li>
           {% endif %}
