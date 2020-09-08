@@ -40,7 +40,7 @@ permalink: "post/{{ post.slug }}/"
       </div>
     </div>
   </div>
-  <div class="container mx-auto my-16">
+  <div class="container mx-auto my-16 px-4 lg:px-0">
     <div class="post-content flex flex-col md:flex-row">
       <div class="ck-content mx-4 md:mx-0 md:w-2/3">
         {{ post.content | safe }}
@@ -63,7 +63,7 @@ permalink: "post/{{ post.slug }}/"
               </div>
             </div>
             <a href="/post/{{ item.slug }}/">
-              <img class="rounded-xl" aria-hidden="false" src="{{ item.imagePostRecent.url }}" alt="" loading="lazy">
+              <img class="rounded-xl w-16 lg:w-auto" aria-hidden="false" src="{{ item.imagePostRecent.url }}" alt="" loading="lazy">
             </a>
           </div>
         {% endfor %}
