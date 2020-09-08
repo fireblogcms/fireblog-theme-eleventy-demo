@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
     <meta name="generator" content="Eleventy">
     <link rel="icon" type="image/jpeg" href="/favicon.ico"/>
-    <link rel='preload' as='style' href='/assets/css/styles.css'/>
+    <link rel="preload" as="style" href="/assets/css/styles.css"/>
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="apple-touch-icon" href="/favicon.ico"/>
     {# https://timkadlec.com/remembers/2018-06-06-web-watch/ #}
@@ -25,7 +25,7 @@
     class="layout section-{{ section }}"
   >
     <header class="sticky top-0 bg-white border-b border-gray-300 text-primary h-20 flex items-center" id="header" role="banner">
-      <div class="container mx-auto px-4 lg:px-0">
+      <div class="container mx-auto px-4">
         <div class="flex justify-between items-center">
           <div class="w-3/4 md:w-auto">
             {% if page.url === "/" %}
@@ -68,7 +68,7 @@
       {% block content %} {% endblock %}
     </main>
 
-    <section class="container mx-auto px-4 lg:px-0">
+    <section class="container mx-auto px-4">
       <div class="my-10 flex justify-between items-center">
         <h3 class="text-xl font-bold">{{ config.followUsText }}</h3>
         <ul class="flex items-center">

@@ -12,8 +12,7 @@
     "dev": "eleventy --serve",
     "css:build": "postcss src/styles/main.css -o src/static/assets/css/styles.css",
     "css:watch": "chokidar 'src/styles/**/*.css' --command 'npm run css:build'",
-    "postcss": "postcss src/static/assets/css/styles.css -o _site/assets/css/styles.css",
-    "build": "cross-env ELEVENTY_ENV=production npm-run-all --sequential css:build eleventy:build postcss",
+    "build": "cross-env ELEVENTY_ENV=production npm-run-all --sequential css:build eleventy:build",
     "watch": "cross-env ELEVENTY_ENV=development npm-run-all -p css:watch eleventy:watch"
   },
   "browserslist": [
