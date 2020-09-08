@@ -18805,6 +18805,17 @@ video {
   animation: bounce 1s infinite;
 }
 
+@font-face {
+  font-family: 'Open Sans';
+
+  src:  url('/assets/fonts/opensans-webfont.woff2') format('woff2'),
+        url('/assets/fonts/opensans-webfont.woff') format('woff');
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /* Burger menu */
 
 .burger-menu input ~ ul {
@@ -18816,6 +18827,10 @@ video {
 }
 
 /* Post content */
+
+.ck-content a {
+  color: #338aff;
+}
 
 .ck-content li + li {
   margin-top: 0.25em;

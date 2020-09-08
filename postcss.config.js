@@ -1,10 +1,17 @@
 const purgecss = require('@fullhuman/postcss-purgecss')({
-  content: [
-    './_site/**/*.html',
+  content: ["./_site/**/*.html"],
+  defaultExtractor: content => {
+    const broadMatches =
+      content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
+    const innerMatches =
+      content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || [];
+    return broadMatches.concat(innerMatches);
+  },
+  whitelist: [],
+  whitelistPatterns: [
+    /-(leave|enter|appear)(|-(to|from|active))$/,
+    /^(?!(|.*?:)cursor-move).+-move$/,
   ],
-  defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-  whitelist:['is-active'],
-  whitelistPatternsChildren: [/^content$/, /^pagination$/],
 })
 const postcssclean = require('postcss-clean')({
   level: 1
