@@ -25,13 +25,14 @@ async function graphql({query, variables}) {
   return response;
 }
 
-function getBlog() {
+function getBlog(id) {
   return graphql({
     variables: {
+      id,
       siteUrl: process.env.SITE_URL 
     },
-    query: `query getBlog {
-      blog {
+    query: `query getBlog($id: ID!) {
+      blog(filter: { _id: { eq: $id } }) {
         name
         description
         image {
@@ -43,53 +44,48 @@ function getBlog() {
   })
 }
 
-async function getPosts({last, before }) {
+async function getPosts({ itemsPerPage, page, blogId }) {
   return graphql({
     variables: {
-      last,
-      before,
+      itemsPerPage,
+      page,
+      blogId,
       siteUrl: process.env.SITE_URL 
     },
-    query: `query getPosts($last: Int!, $before: Cursor) {
-      posts(last: $last, before: $before) {
-        totalCount
-        pageInfo {
+    query: `query getPosts($itemsPerPage: Int!, $page: Int!, $blogId: ID!) {
+      posts(itemsPerPage: $itemsPerPage, page: $page, filter: { blog: { eq: $blogId } }, sort: { publishedAt: desc }) {
+        pagination {
+          totalItems
+          totalPages
           hasNextPage
-          endCursor
+          hasPreviousPage
         }
-        edges {
-          cursor
-          node {
-            teaser
-            slug
-            title
-            content
-            publishedAt
-            updatedAt
-            image(auto:[compress,format]) {
-              url
-              alt
-            }
-            imagePostPage:image(w:1920, h:1080, fit:crop, auto:[compress,format]) {
-              url
-              alt
-            }
-            imagePostList:image(w:400, h:220, fit:crop, auto:[compress,format]) {
-              url
-              alt
-            }
-            imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
-              url
-              alt
-            }
-            imagePostRecent:image(w:100, h:100, fit:crop, auto:[compress,format]) {
-              url
-              alt
-            }
-            author {
-              name
-              picture
-            }
+        items {
+          teaser
+          slug
+          title
+          content
+          publishedAt
+          updatedAt
+          image(auto:[compress,format]) {
+            url
+            alt
+          }
+          imagePostPage:image(w:1920, h:1080, fit:crop, auto:[compress,format]) {
+            url
+            alt
+          }
+          imagePostList:image(w:400, h:220, fit:crop, crop:center, auto:[compress,format]) {
+            url
+            alt
+          }
+          imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
+            url
+            alt
+          }
+          imagePostRecent:image(w:100, h:100, fit:crop, auto:[compress,format]) {
+            url
+            alt
           }
         }
       }

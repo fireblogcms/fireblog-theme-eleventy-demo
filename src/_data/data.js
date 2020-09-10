@@ -7,7 +7,7 @@ module.exports = async() => {
   // this is *NOT* related to how many posts are displayed per page on homepage.
   // Please see pagination parameter in ./index.html file 
   // if you want to configure how many posts are displayed per page.
-  const postsPerQuery = 100;
+  const postsPerQuery = 50;
 
   // data will be available from Eleventy templates
   let data = {
@@ -16,32 +16,36 @@ module.exports = async() => {
   };
 
   // get blog informations
-  console.log(`Fetching blog informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT} 🏃‍♀️`)
-  const response = await getBlog();
+  console.log(`Fetching blog informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT} 🏃‍♀️`);
+  const response = await getBlog(process.env.BLOG_ID);
 
   data.blog = response.data.blog;
   if (response.errors) {
-    console.log('GraphQL error: ')
-    throw new Error(JSON.stringify(response.errors, 0, 2))
+    console.log('GraphQL error: ');
+    throw new Error(JSON.stringify(response.errors, 0, 2));
   }
   
-  console.log(`${data.blog.name} 📗`)
+  console.log(`${data.blog.name} 📗`);
 
   // get ALL posts from fireblog
   let hasNextPage = true;
-  let before = "";
+  let page = 1;
   while (hasNextPage) {
-    console.log(`Fetching ${postsPerQuery} posts 🏃‍♀️`)
-    const response = await getPosts({ last: postsPerQuery, before })
+    console.log(`Fetching ${postsPerQuery} posts 🏃‍♀️`);
+    const response = await getPosts({
+      itemsPerPage: postsPerQuery,
+      page,
+      blogId: process.env.BLOG_ID
+    });
     if (response.errors) {
-      console.log('GraphQL error: ')
-      throw new Error(JSON.stringify(response.errors, 0, 2))
+      console.log('GraphQL error: ');
+      throw new Error(JSON.stringify(response.errors, 0, 2));
     }
-    const { pageInfo, edges } = response.data.posts;
-    const posts = edges.map(edge => edge.node)
-    data.posts = data.posts.concat(posts);
-    hasNextPage = pageInfo.hasNextPage;
-    before = pageInfo.endCursor;
+    const { pagination, items } = response.data.posts;
+    data.posts = data.posts.concat(items);
+    hasNextPage = pagination.hasNextPage;
+    ++page;
   }
+
   return data;
 }
