@@ -4,7 +4,7 @@
   "description": "eleventy starter blog for fireblog",
   "keywords": [],
   "license": "ISC",
-  "author": "Bertrand Keller",
+  "author": "Léo Gaboriau",
   "main": "index.js",
   "scripts": {
     "eleventy:build": "eleventy",
