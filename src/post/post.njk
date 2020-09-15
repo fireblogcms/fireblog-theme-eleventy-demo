@@ -71,15 +71,3 @@ permalink: "post/{{ post.slug }}/"
     </div>
   </div>
 {% endblock %}
-
-{% block scripts %}
-  <script src="https://cdn.iframe.ly/embed.js?api_key={{process.env.IFRAMELY_API_KEY}}"></script>
-  <script>
-    // display rich links preview with iframely, if here is a iframely key
-    if (window.iframely && "{{process.env.IFRAMELY_API_KEY}}".trim().length > 0) {
-      document.querySelectorAll("oembed[url]").forEach(element => {
-        window.iframely.load(element, element.attributes.url.value);
-      });
-    }
-  </script>
-{% endblock %}
