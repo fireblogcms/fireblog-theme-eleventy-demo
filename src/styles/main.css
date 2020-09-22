@@ -27,6 +27,11 @@ body {
   display: block;
 }
 
+/* Iframely */
+.iframely-api-container {
+  width: 100%;
+}
+
 /* Post content */
 .ck-content {
   font-family: 'Lora', sans-serif;
