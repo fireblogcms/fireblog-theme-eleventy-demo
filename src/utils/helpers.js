@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
 module.exports = {
   graphql,
@@ -8,10 +8,10 @@ module.exports = {
 
 async function graphql({ query, variables }) {
   let response = await fetch(process.env.FIREBLOG_GRAPHQL_ENDPOINT, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify({
       query,
@@ -20,7 +20,7 @@ async function graphql({ query, variables }) {
   });
   response = await response.json();
   if (response.errors) {
-    console.log("❌ GraphQL Error: ", response.errors);
+    console.log('❌ GraphQL Error: ', response.errors);
   }
   return response;
 }

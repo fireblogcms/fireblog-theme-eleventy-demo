@@ -7,13 +7,13 @@
   "author": "Léo Gaboriau",
   "main": "index.js",
   "scripts": {
+    "dev": "cross-env ELEVENTY_ENV=development npm-run-all -p css:watch eleventy:watch",
+    "build": "cross-env ELEVENTY_ENV=production npm-run-all --sequential clean eleventy:build css:build",
+    "clean": "rm -rf _site",
     "eleventy:build": "eleventy",
     "eleventy:watch": "eleventy --serve",
-    "dev": "eleventy --serve",
-    "css:build": "postcss src/styles/main.css -o src/static/assets/css/styles.css",
-    "css:watch": "chokidar 'src/styles/**/*.css' --command 'npm run css:build'",
-    "build": "cross-env ELEVENTY_ENV=production npm-run-all --sequential css:build eleventy:build",
-    "watch": "cross-env ELEVENTY_ENV=development npm-run-all -p css:watch eleventy:watch"
+    "css:build": "postcss src/styles/main.css -o _site/assets/css/styles.css",
+    "css:watch": "chokidar 'src/styles/**/*.css' --command 'npm run css:build'"
   },
   "browserslist": [
     "last 1 Chrome versions",
@@ -26,8 +26,6 @@
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "autoprefixer": "^9.7.5",
-    "chokidar": "^3.3.1",
-    "chokidar-cli": "^2.1.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "html-minifier": "^4.0.0",
@@ -40,5 +38,23 @@
     "postcss-cli": "^7.1.0",
     "postcss-preset-env": "^6.7.0",
     "tailwindcss": "^1.7.6"
+  },
+  "devDependencies": {
+    "chokidar": "^3.3.1",
+    "chokidar-cli": "^2.1.0",
+    "husky": ">=1",
+    "lint-staged": ">=8",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

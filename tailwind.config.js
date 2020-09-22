@@ -18,7 +18,7 @@ module.exports = {
         'almost-full': 'calc(100vh - 5rem)',
       },
       inset: {
-       '1/2': '50%',
+        '1/2': '50%',
       },
       scale: {
         250: '2.5',
@@ -30,4 +30,4 @@ module.exports = {
   },
   variants: {},
   plugins: [],
-}
+};

@@ -4,6 +4,4 @@ _logs
 _scripts
 _site
 .env
-static/assets/css/*
-!static/assets/css/README.md
 yarn.lock

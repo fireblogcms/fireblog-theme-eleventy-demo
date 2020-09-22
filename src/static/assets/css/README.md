@@ -1,1 +1,0 @@
-This directory will contain compiled files from _assets/scss folder.

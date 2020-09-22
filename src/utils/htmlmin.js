@@ -1,4 +1,4 @@
-const htmlmin = require('html-minifier')
+const htmlmin = require('html-minifier');
 
 module.exports = function(content, outputPath) {
   if (outputPath.endsWith('.html')) {
@@ -6,9 +6,9 @@ module.exports = function(content, outputPath) {
       useShortDoctype: true,
       removeComments: true,
       collapseWhitespace: true,
-    })
-    return minified
+    });
+    return minified;
   }
 
-  return content
-}
+  return content;
+};

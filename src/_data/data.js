@@ -1,5 +1,5 @@
-const { getPosts, getBlog, graphql } = require("../utils/helpers");
-require("dotenv").config();
+const { getPosts, getBlog, graphql } = require('../utils/helpers');
+require('dotenv').config();
 
 // export for 11ty
 module.exports = async () => {
@@ -36,7 +36,7 @@ module.exports = async () => {
 
   data.blog = response.data.blog;
   if (response.errors) {
-    console.log("GraphQL error: ");
+    console.log('GraphQL error: ');
     throw new Error(JSON.stringify(response.errors, 0, 2));
   }
 
@@ -55,7 +55,7 @@ module.exports = async () => {
       filter: postsFilter,
     });
     if (response.errors) {
-      console.log("GraphQL error: ");
+      console.log('GraphQL error: ');
       throw new Error(JSON.stringify(response.errors, 0, 2));
     }
 
