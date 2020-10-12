@@ -37,7 +37,6 @@ function getBlog(id) {
         description
         image {
           url
-          alt
         }
       }
     }`,
@@ -61,23 +60,18 @@ async function getPosts({ limit, skip, filter }) {
         updatedAt
         image(auto:[compress,format]) {
           url
-          alt
         }
         imagePostPage:image(w:1920, h:1080, fit:crop, auto:[compress,format]) {
           url
-          alt
         }
         imagePostList:image(w:400, h:220, fit:crop, crop:center, auto:[compress,format]) {
           url
-          alt
         }
         imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
           url
-          alt
         }
         imagePostRecent:image(w:100, h:100, fit:crop, auto:[compress,format]) {
           url
-          alt
         }
       }
     }`,
