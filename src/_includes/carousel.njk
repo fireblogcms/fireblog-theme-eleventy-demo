@@ -1,0 +1,67 @@
+<script>
+  const duration = 4000;
+  let currentItemIndex = 1;
+  let nextItemIndex = 2;
+
+  if (document.querySelector(".carousel")) {
+    for (let i = 1; i <= "{{ data.carouselPosts.length }}"; ++i) {
+      const thumbnailItem = document.querySelector(`#carousel-item-thumbnail-${i}`);
+
+      thumbnailItem.addEventListener('click', event => {
+        const currentItem = document.querySelector(`.carousel-item.opacity-100`);
+        const nextItem = document.querySelector(`#carousel-item-${i}`);
+        const currentItemThumbnailTitle = document.querySelector(`.carousel-item-thumbnail-title.opacity-100`);
+        const nextItemThumbnailTitle = document.querySelector(`#carousel-item-thumbnail-${i} .carousel-item-thumbnail-title`);
+
+        changeItemVisibility(currentItem, nextItem);
+        changeItemThumbnailTitleVisibility(currentItemThumbnailTitle, nextItemThumbnailTitle);
+
+        currentItemIndex = i;
+        nextItemIndex = (i === 3) ? 1 : i + 1;
+
+        clearInterval(timer);
+        timer = setInterval(changeItems, duration);
+      });
+    }
+
+    let timer = setInterval(changeItems, duration);
+  }
+
+  function changeItemVisibility(currentItem, nextItem) {
+    currentItem.classList.remove("opacity-100");
+    currentItem.classList.remove("z-10");
+    currentItem.classList.add("opacity-0");
+    nextItem.classList.remove("opacity-0");
+    nextItem.classList.add("opacity-100");
+    nextItem.classList.add("z-10");
+  }
+
+  function changeItemThumbnailTitleVisibility(currentItemThumbnailTitle, nextItemThumbnailTitle) {
+    currentItemThumbnailTitle.classList.remove("opacity-100");
+    currentItemThumbnailTitle.classList.add("opacity-50");
+    nextItemThumbnailTitle.classList.remove("opacity-50");
+    nextItemThumbnailTitle.classList.add("opacity-100");
+  }
+
+  function changeItems() {
+    const currentItem = document.querySelector(`#carousel-item-${currentItemIndex}`);
+    const nextItem = document.querySelector(`#carousel-item-${nextItemIndex}`);
+    const currentItemThumbnailTitle = document.querySelector(`#carousel-item-thumbnail-${currentItemIndex} .carousel-item-thumbnail-title`);
+    const nextItemThumbnailTitle = document.querySelector(`#carousel-item-thumbnail-${nextItemIndex} .carousel-item-thumbnail-title`);
+
+    changeItemVisibility(currentItem, nextItem);
+    changeItemThumbnailTitleVisibility(currentItemThumbnailTitle, nextItemThumbnailTitle);
+    
+    if (currentItemIndex === 3) {
+      currentItemIndex = 1;
+    } else {
+      ++currentItemIndex;
+    }
+
+    if (nextItemIndex === 3) {
+      nextItemIndex = 1;
+    } else {
+      ++nextItemIndex;
+    }
+  }
+</script>

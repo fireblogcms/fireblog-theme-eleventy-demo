@@ -52,6 +52,7 @@ async function getPosts({ limit, skip, filter }) {
     },
     query: `query getPosts($limit: Int!, $skip: Int, $filter: PostFilter) {
       posts(limit: $limit, skip: $skip, filter: $filter, sort: { publishedAt: desc }) {
+        _id
         teaser
         slug
         title
@@ -68,6 +69,9 @@ async function getPosts({ limit, skip, filter }) {
           url
         }
         imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
+          url
+        }
+        imagePostCarouselThumbnail:image(w:100, h:100, fit:crop, auto:[compress,format]) {
           url
         }
         imagePostRecent:image(w:100, h:100, fit:crop, auto:[compress,format]) {

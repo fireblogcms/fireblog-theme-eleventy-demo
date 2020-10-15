@@ -10,10 +10,18 @@ module.exports = async () => {
   // if you want to configure how many posts are displayed per page.
   const postsPerQuery = 50;
 
+  // Posts displayed in the carousel
+  const carouselPostIds = [
+    '5e1e91672c9fdc00042d6b9c',
+    '5e0f8205b238bf0004dac0e9',
+    '5e0cc76ac96420000444d378',
+  ];
+
   // data property will be available in all our Eleventy templates
   let data = {
     blog: null,
     posts: [],
+    carouselPosts: [],
   };
 
   const postsFilter = { blog: { eq: process.env.BLOG_ID } };
@@ -30,7 +38,7 @@ module.exports = async () => {
 
   // get blog informations
   console.log(
-    `Fetching blog informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT} 🏃‍♀️`
+    `Fetching blog informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}...`
   );
   const response = await getBlog(process.env.BLOG_ID);
 
@@ -40,20 +48,19 @@ module.exports = async () => {
     throw new Error(JSON.stringify(response.errors, 0, 2));
   }
 
-  console.log(`${data.blog.name} 📗`);
-
   // get ALL posts from fireblog
   let limit = postsPerQuery;
   let page = 1;
   let skip = 0;
   let totalPages = Math.ceil(postsCount / limit);
   while (page <= totalPages) {
-    console.log(`Fetching ${postsPerQuery} posts 🏃‍♀️`);
+    console.log(`Fetching ${postsPerQuery} posts of ${data.blog.name}...`);
     const response = await getPosts({
       limit,
       skip,
       filter: postsFilter,
     });
+
     if (response.errors) {
       console.log('GraphQL error: ');
       throw new Error(JSON.stringify(response.errors, 0, 2));
@@ -64,5 +71,12 @@ module.exports = async () => {
     skip = page * limit;
     ++page;
   }
+
+  for (const carouselPostId of carouselPostIds) {
+    data.carouselPosts.push(
+      data.posts.find(post => post._id === carouselPostId)
+    );
+  }
+
   return data;
 };
