@@ -57,6 +57,10 @@ async function getPosts({ limit, skip, filter }) {
         slug
         title
         content
+        tags {
+          name
+          slug
+        }
         publishedAt
         updatedAt
         image(auto:[compress,format]) {
