@@ -1,4 +1,4 @@
-const { getPosts, getBlog, graphql } = require('../utils/helpers');
+const { getPosts, getBlog, getTags, graphql } = require('../utils/helpers');
 require('dotenv').config();
 
 // export for 11ty
@@ -48,6 +48,18 @@ module.exports = async () => {
     throw new Error(JSON.stringify(response.errors, 0, 2));
   }
 
+  // get tags informations
+  console.log(
+    `Fetching tags informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}...`
+  );
+  const tagResponse = await getTags(process.env.BLOG_ID);
+
+  data.tags = tagResponse.data.tags;
+  if (tagResponse.errors) {
+    console.log('GraphQL error: ');
+    throw new Error(JSON.stringify(tagResponse.errors, 0, 2));
+  }
+
   // get ALL posts from fireblog
   let limit = postsPerQuery;
   let page = 1;
@@ -77,6 +89,17 @@ module.exports = async () => {
       data.posts.find(post => post._id === carouselPostId)
     );
   }
+
+  // filter only tags with posts
+  data.tags = data.tags.reduce((accumulator, tag) => {
+    const posts = data.posts.filter(
+      post => !!post.tags.find(t => t.slug === tag.slug)
+    );
+    if (posts.length > 0) {
+      return [...accumulator, { ...tag, posts }];
+    }
+    return accumulator;
+  }, []);
 
   return data;
 };

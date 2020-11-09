@@ -4,6 +4,7 @@ module.exports = {
   graphql,
   getBlog,
   getPosts,
+  getTags,
 };
 
 async function graphql({ query, variables }) {
@@ -81,6 +82,21 @@ async function getPosts({ limit, skip, filter }) {
         imagePostRecent:image(w:100, h:100, fit:crop, auto:[compress,format]) {
           url
         }
+      }
+    }`,
+  });
+}
+
+async function getTags(id) {
+  return graphql({
+    variables: {
+      id,
+    },
+    query: `query getTags($id: ID!) {
+      tags(blog: $id) {
+        _id
+        name
+        slug
       }
     }`,
   });
