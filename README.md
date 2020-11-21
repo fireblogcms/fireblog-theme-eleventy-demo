@@ -9,13 +9,13 @@ Fireblog ( https://fireblogcms.com/) is a new headless CMS dedicated to blogging
 Clone this repo.
 
 ```sh
-git clone git@github.com:fireblogcms/eleventy-disto-fireblog.git fireblog-eleventy
+git clone https://github.com/fireblogcms/fireblog-theme-seo-booster fireblog-theme-seo-booster
 ```
 
 Install dependencies
 
 ```sh
-cd fireblog-eleventy
+cd fireblog-theme-seo-booster
 npm install
 ```
 
