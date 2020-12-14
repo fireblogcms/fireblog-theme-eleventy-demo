@@ -71,6 +71,7 @@ module.exports = async () => {
       query featuredPosts($filter: PostFilter) {
           posts(limit: 4, filter: $filter) {
             _id
+            slug
             title
             teaser
             imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
