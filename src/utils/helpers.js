@@ -68,12 +68,6 @@ async function getPosts({ limit, skip, filter }) {
         imagePostList:image(w:400, h:220, fit:crop, crop:center, auto:[compress,format]) {
           url
         }
-        imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
-          url
-        }
-        imagePostCarouselThumbnail:image(w:100, h:100, fit:crop, auto:[compress,format]) {
-          url
-        }
         imagePostRecent:image(w:100, h:100, fit:crop, auto:[compress,format]) {
           url
         }
