@@ -105,5 +105,8 @@ permalink: "{% if pagination.pageNumber > 0 %}/pages/{{ pagination.pageNumber + 
       </nav>
     {% endif %}
   </section>
+{% endblock %}
 
+{% block scripts %}
+  {% include "carouselJS.njk" %}
 {% endblock %}
