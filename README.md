@@ -9,7 +9,7 @@ Fireblog ( https://fireblogcms.com/) is a new headless CMS dedicated to blogging
 Clone this repo.
 
 ```sh
-git clone https://github.com/fireblogcms/fireblog-theme-seo-booster fireblog-theme-seo-booster
+git clone https://github.com/fireblogcms/fireblog-theme-seo-booster fireblog
 ```
 
 Install dependencies
