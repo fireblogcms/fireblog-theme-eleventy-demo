@@ -7,7 +7,7 @@
   "author": "Léo Gaboriau",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env ELEVENTY_ENV=development npm-run-all -p css:watch eleventy:watch",
+    "dev": "cross-env ELEVENTY_ENV=development npm-run-all -p css:build css:watch eleventy:watch",
     "build": "cross-env ELEVENTY_ENV=production npm-run-all --sequential clean eleventy:build css:build",
     "clean": "rm -rf _site",
     "eleventy:build": "eleventy",
