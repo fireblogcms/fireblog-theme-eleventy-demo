@@ -25,6 +25,12 @@ Set your environment variables by creating a `.env` file copied from the `.env.t
 cp .env.template .env
 ```
 
+Run locally in dev mode:
+
+```sh
+npm run dev
+```
+
 Now build your static blog :
 
 ```sh
