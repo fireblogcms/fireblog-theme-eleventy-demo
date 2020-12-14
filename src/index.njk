@@ -21,7 +21,9 @@ permalink: "{% if pagination.pageNumber > 0 %}/pages/{{ pagination.pageNumber + 
 
 {% block content %}
 
-  {% include "carousel.njk" %}
+  {% if data.carouselPosts | length > 0 %}
+   {% include "carousel.njk" %}
+  {% endif %}
 
   <section class="container mx-auto my-4">
     <div class="flex flex-wrap">
