@@ -4,8 +4,14 @@
     const duration = 4000;
     return {
       activeSlide: 1,
+      pause: false,
       init() {
-        setInterval(() => this.activeSlide = (this.activeSlide + 1 > {{ data.carouselPosts.length }}) ? 1 : this.activeSlide + 1, duration)
+        setInterval(() => {
+          if (!this.pause) {
+            this.activeSlide = (this.activeSlide + 1 > {{ data.carouselPosts.length }}) ? 1 : this.activeSlide + 1;
+          }
+        }, 
+        duration)
       }
     };
   }
@@ -20,6 +26,8 @@
     <!-- SLIDES -->
     {% for item in data.carouselPosts %}
       <a
+        @mouseenter="pause = true"
+        @mouseleave="pause = false"
         x-show="activeSlide == {{ loop.index }}"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 transform scale-100"

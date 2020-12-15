@@ -74,6 +74,7 @@ module.exports = async () => {
             slug
             title
             teaser
+            publishedAt
             imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
               url
             }
