@@ -12,16 +12,7 @@ One of the easiest way to deploy your static blog is to use Netlify.
 <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
 </a>
 
-## configure Netlify
-
-**Build & deploy" > "Build settings"**
-
-- Build command: `npm run build`
-- Publish directory: `_site`
-
-**build & deploy > Environment**
-
-Create all environment variables listed in .env.template file in "Build & deploy" > "Environment" section.
+## configure Netlify build hook
 
 **Build & deploy > Build hooks**
 
