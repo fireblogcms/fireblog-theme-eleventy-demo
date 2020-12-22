@@ -1,10 +1,33 @@
-# Eleventy disto theme for fireblog CMS.
+# Eleventy starter theme for fireblog
 
 Eleventy is a great and simple static site generator: https://www.11ty.dev/
 
 Fireblog ( https://fireblogcms.com/) is a new headless CMS dedicated to blogging, with a very simple but powerful writing interface. Try beta for free (one month trial): https://app.fireblogcms.com/ ).
 
-## Getting started
+## deploy
+
+One of the easiest way to deploy your static blog is to use Netlify.
+
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/fireblogcms/fireblog-theme-seo-booster">
+<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
+</a>
+
+## configure Netlify
+
+**Build & deploy" > "Build settings"**
+
+- Build command: `npm run build`
+- Publish directory: `_site`
+
+**build & deploy > Environment**
+
+Create all environment variables listed in .env.template file in "Build & deploy" > "Environment" section.
+
+**Build & deploy > Build hooks**
+
+Create a "fireblog" hook. Copy paste this hook link in Fireblog, in "blog settings > Deploy webhook" section.
+
+## dev: cetting started
 
 Clone this repo.
 
