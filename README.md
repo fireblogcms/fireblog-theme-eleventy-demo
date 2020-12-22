@@ -6,7 +6,7 @@ Fireblog ( https://fireblogcms.com/) is a new headless CMS dedicated to blogging
 
 ## deploy it now
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/fireblogcms/fireblog-theme-seo-booster?FIREBLOG_GRAPHQL_ENDPOINT=https://api.fireblogcms.com/graphql/blogset/5f5f73057ac2640018cb0fc7&FIREBLOG_BLOG_ID="5e0cc6b2c96420000444d376"">
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/fireblogcms/fireblog-theme-seo-booster?FIREBLOG_GRAPHQL_ENDPOINT=https://api.fireblogcms.com/graphql/blogset/5f5f73057ac2640018cb0fc7&FIREBLOG_BLOG_ID=5e0cc6b2c96420000444d376&SITE_URL=https://yoursite.netlify.app">
 <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
 </a>
 
