@@ -24,7 +24,7 @@ Deploy settings > build & deploy: create a new "fireblog" build hook
 
 in your blog settings > Deploy webhook, copy paste the build hook created on Netlify
 
-## dev: cetting started
+## dev: getting started
 
 Clone this repo.
 
