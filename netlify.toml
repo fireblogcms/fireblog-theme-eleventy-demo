@@ -7,5 +7,5 @@
 
 [template.environment]
   FIREBLOG_GRAPHQL_ENDPOINT = "Fireblog GraphQL Endpoint"
-  FIREBLOG_BLOG_ID = "Fireblog blog id"
+  BLOG_ID = "Fireblog blog id"
   SITE_URL = "Absolute site url"
