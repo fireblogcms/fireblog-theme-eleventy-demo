@@ -8,7 +8,7 @@ Fireblog ( https://fireblogcms.com/) is a new headless CMS dedicated to blogging
 
 One of the easiest way to deploy your static blog is to use Netlify.
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/fireblogcms/fireblog-theme-seo-booster">
+<a href='https://app.netlify.com/start/deploy?repository=https://github.com/fireblogcms/fireblog-theme-seo-booster#FIREBLOG_GRAPHQL_ENDPOINT="https://api.fireblogcms.com/beta/blogset/5f5f73057ac2640018cb0fc7"&FIREBLOG_BLOG_ID="5e0cc6b2c96420000444d376"&FIREBLOG_FOLDER_BLOG_ID="5e0cc6b2c96420000444d377"&SITE_URL="http://localhost:3000"'>
 <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
 </a>
 
