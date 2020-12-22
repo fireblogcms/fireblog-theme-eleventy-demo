@@ -4,6 +4,12 @@ Eleventy is a great and simple static site generator: https://www.11ty.dev/
 
 Fireblog ( https://fireblogcms.com/) is a new headless CMS dedicated to blogging, with a very simple but powerful writing interface. Try beta for free (one month trial): https://app.fireblogcms.com/ ).
 
+## deploy it now
+
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/fireblogcms/fireblog-theme-seo-booster">
+<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
+</a>
+
 ## Getting started
 
 Clone this repo.
