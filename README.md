@@ -16,11 +16,11 @@ The easiest way to deploy your static blog is to use Netlify: just click on this
 
 Your blog need to be rebuild when fireblog content changes. Fortunately, Fireblog can send an HTTP request to Netlify to trigger a rebuild!
 
-### Create a new "build hook" on Netlify
+**1) Create a new "build hook" on Netlify**
 
 Deploy settings > build & deploy: create a new "fireblog" build hook
 
-### Trigger this build hook on content change with Fireblog
+**2) Trigger this build hook on content change with Fireblog**
 
 in your blog settings > Deploy webhook, copy paste the build hook created on Netlify
 
