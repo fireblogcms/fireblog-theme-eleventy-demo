@@ -6,7 +6,7 @@ Fireblog ( https://fireblogcms.com/) is a new headless CMS dedicated to blogging
 
 ## deploy
 
-One of the easiest way to deploy your static blog is to use Netlify.
+The easiest way to deploy your static blog is to use Netlify: just click on this button and follow the instructions!
 
 <a href='https://app.netlify.com/start/deploy?repository=https://github.com/fireblogcms/fireblog-theme-seo-booster#FIREBLOG_GRAPHQL_ENDPOINT=https://api.fireblogcms.com/graphql/blogset/5f5f73057ac2640018cb0fc7&BLOG_ID=5e0cc6b2c96420000444d376&SITE_URL=https://yoursite.netlify.app'>
 <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
@@ -14,9 +14,15 @@ One of the easiest way to deploy your static blog is to use Netlify.
 
 ## configure Netlify build hook
 
-**Build & deploy > Build hooks**
+Your blog need to be rebuild when fireblog content changes. Fortunately, Fireblog can send an HTTP request to Netlify to trigger a rebuild!
 
-Create a "fireblog" hook. Copy paste this hook link in Fireblog, in "blog settings > Deploy webhook" section.
+### Create a new "build hook" on Netlify
+
+Deploy settings > build & deploy: create a new "fireblog" build hook
+
+### Trigger this build hook on content change with Fireblog
+
+in your blog settings > Deploy webhook, copy paste the build hook created on Netlify
 
 ## dev: cetting started
 
