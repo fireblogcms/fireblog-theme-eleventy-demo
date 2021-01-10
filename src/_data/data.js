@@ -14,6 +14,7 @@ module.exports = async () => {
   let data = {
     blog: null,
     posts: [],
+    tags: [],
     carouselPosts: [],
   };
 
@@ -35,22 +36,13 @@ module.exports = async () => {
   );
   const response = await getBlog(process.env.BLOG_ID);
   data.blog = response.data.blog;
-  if (response.errors) {
-    console.log('GraphQL error: ');
-    throw new Error(JSON.stringify(response.errors, 0, 2));
-  }
 
-  // get tags informations
+  // get all blog tags
   console.log(
     `Fetching tags informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}...`
   );
   const tagResponse = await getTags(process.env.BLOG_ID);
-
   data.tags = tagResponse.data.tags;
-  if (tagResponse.errors) {
-    console.log('GraphQL error: ');
-    throw new Error(JSON.stringify(tagResponse.errors, 0, 2));
-  }
 
   // get ALL posts from fireblog
   let limit = postsPerQuery;

@@ -8,7 +8,9 @@ module.exports = {
 };
 
 async function graphql({ query, variables }) {
-  let response = await fetch(process.env.FIREBLOG_GRAPHQL_ENDPOINT, {
+  let response = null;
+
+  response = await fetch(process.env.FIREBLOG_GRAPHQL_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -21,7 +23,8 @@ async function graphql({ query, variables }) {
   });
   response = await response.json();
   if (response.errors) {
-    console.log('❌ GraphQL Error: ', response.errors);
+    console.log('GraphQL Error:');
+    throw new Error(JSON.stringify(response.errors, 0, 2));
   }
   return response;
 }
@@ -81,16 +84,19 @@ async function getPosts({ limit, skip, filter }) {
   });
 }
 
-async function getTags(id) {
+async function getTags(blogId) {
   return graphql({
     variables: {
-      id,
+      blogId,
     },
-    query: `query getTags($id: ID!) {
-      tags(blog: $id) {
+    query: `query getTags($blogId: ID!) {
+      tags(limit: 100, filter: { blog: { eq: $blogId } } ) {
         _id
         name
         slug
+        description
+        metaTitle
+        metaDescription
       }
     }`,
   });
