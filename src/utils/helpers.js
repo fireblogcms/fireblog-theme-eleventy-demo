@@ -5,12 +5,12 @@ module.exports = {
   getBlog,
   getPosts,
   getTags,
+  getFeaturedPosts,
+  getPostsCount,
 };
 
 async function graphql({ query, variables }) {
-  let response = null;
-
-  response = await fetch(process.env.FIREBLOG_GRAPHQL_ENDPOINT, {
+  let response = await fetch(process.env.FIREBLOG_GRAPHQL_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ function getBlog(id) {
 }
 
 async function getPosts({ limit, skip, filter }) {
-  return graphql({
+  const response = await graphql({
     variables: {
       limit,
       skip,
@@ -82,10 +82,23 @@ async function getPosts({ limit, skip, filter }) {
       }
     }`,
   });
+  return response.data.posts;
+}
+
+async function getPostsCount(filter) {
+  const response = await graphql({
+    variables: { filter },
+    query: `
+      query postsCount($filter: PostFilter) {
+          postsCount(filter: $filter)
+        }
+    `,
+  });
+  return response.data.postsCount;
 }
 
 async function getTags(blogId) {
-  return graphql({
+  const response = await graphql({
     variables: {
       blogId,
     },
@@ -100,4 +113,31 @@ async function getTags(blogId) {
       }
     }`,
   });
+  return response.data.tags;
+}
+
+async function getFeaturedPosts(blogId) {
+  const response = await graphql({
+    variables: {
+      filter: { featured: true, blog: { eq: blogId } },
+    },
+    query: `
+      query featuredPosts($filter: PostFilter) {
+          posts(limit: 4, filter: $filter) {
+            _id
+            slug
+            title
+            teaser
+            publishedAt
+            imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
+              url
+            }
+            imagePostCarouselThumbnail:image(w:100, h:100, fit:crop, auto:[compress,format]) {
+              url
+            }
+          }
+        }
+    `,
+  });
+  return response.data.posts;
 }
