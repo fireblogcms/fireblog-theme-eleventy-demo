@@ -11,11 +11,11 @@ permalink: "tag/{{ tag.slug }}/"
 {% block head %}
     {{
       macros.metadata(
-        title = tag.name + ' | ' + data.blog.name,
-        description = tag.description,
+        title = tag.metaTitle,
+        description = tag.metaDescription,
         url = process.env.SITE_URL + page.url,
         siteName = data.blog.name,
-        image=data.blog.image.url
+        image=tag.image.url
       )
     }}
 {% endblock %}

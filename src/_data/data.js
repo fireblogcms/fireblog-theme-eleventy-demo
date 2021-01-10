@@ -29,12 +29,12 @@ module.exports = async () => {
   const postsFilter = { blog: { eq: process.env.BLOG_ID } };
 
   console.log(
-    `Fetching informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}...`
+    `Fetching informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}`
   );
 
   // POST COUNT (to build pagination)
   console.log('fetching posts count');
-  data.postsCount = getPostsCount(postsFilter);
+  data.postsCount = await getPostsCount(postsFilter);
 
   // BLOG
   console.log(`Fetching blog informations`);

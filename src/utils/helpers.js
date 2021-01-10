@@ -29,8 +29,8 @@ async function graphql({ query, variables }) {
   return response;
 }
 
-function getBlog(id) {
-  return graphql({
+async function getBlog(id) {
+  const response = await graphql({
     variables: {
       id,
       siteUrl: process.env.SITE_URL,
@@ -45,6 +45,7 @@ function getBlog(id) {
       }
     }`,
   });
+  return response.data.blog;
 }
 
 async function getPosts({ limit, skip, filter }) {
@@ -139,5 +140,5 @@ async function getFeaturedPosts(blogId) {
         }
     `,
   });
-  return response.data.posts;
+  return response.data.featuredPosts;
 }
