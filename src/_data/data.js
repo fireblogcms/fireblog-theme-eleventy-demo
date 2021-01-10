@@ -13,13 +13,19 @@ module.exports = async () => {
   // data property will be available in all our Eleventy templates
   let data = {
     blog: null,
-    posts: [],
-    tags: [],
-    carouselPosts: [],
+    postsCount: null,
+    posts: null,
+    tags: null,
+    carouselPosts: null,
   };
-
+  // common filter for posts and postsCount
   const postsFilter = { blog: { eq: process.env.BLOG_ID } };
 
+  console.log(
+    `Fetching informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}...`
+  );
+
+  // POST COUNT (to build pagination)
   const countResponse = await graphql({
     query: `
       query postsCount($filter: PostFilter) {
@@ -30,17 +36,13 @@ module.exports = async () => {
   });
   const postsCount = countResponse.data.postsCount;
 
-  // get blog informations
-  console.log(
-    `Fetching blog informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}...`
-  );
+  // BLOG
+  console.log(`Fetching blog informations`);
   const response = await getBlog(process.env.BLOG_ID);
   data.blog = response.data.blog;
 
-  // get all blog tags
-  console.log(
-    `Fetching tags informations from ${process.env.FIREBLOG_GRAPHQL_ENDPOINT}...`
-  );
+  // TAGS
+  console.log(`Fetching blog tags`);
   const tagResponse = await getTags(process.env.BLOG_ID);
   data.tags = tagResponse.data.tags;
 
@@ -56,14 +58,7 @@ module.exports = async () => {
       skip,
       filter: postsFilter,
     });
-
-    if (response.errors) {
-      console.log('GraphQL error: ');
-      throw new Error(JSON.stringify(response.errors, 0, 2));
-    }
-
     data.posts = data.posts.concat(response.data.posts);
-
     skip = page * limit;
     ++page;
   }
