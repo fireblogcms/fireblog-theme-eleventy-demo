@@ -16,6 +16,7 @@
     <meta name="theme-color" content="#663399">
     {% include "inlineJS.njk" %}
     {% block head %} {% endblock %}
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
   </head>
 
   {% set section = section[1] | replace('index.html', 'home') %}
@@ -119,6 +120,5 @@
     {% endif %}
 
     {% block scripts %}{% endblock %}
-    {% include "carousel.njk" %}
   </body>
 </html>
