@@ -1,7 +1,7 @@
 {
-  "name": "fireblog-theme-seo-booster",
+  "name": "fireblog-theme-eleventy-demo",
   "version": "1.0.0",
-  "description": "eleventy disto blog for fireblog",
+  "description": "eleventy demo blog for fireblog",
   "keywords": [],
   "license": "ISC",
   "author": "Léo Gaboriau",
