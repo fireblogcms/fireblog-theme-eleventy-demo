@@ -8,26 +8,35 @@ permalink: "tag/{{ tag.slug }}/"
 {% extends 'layout.njk' %}
 {% import "macros.njk" as macros %}
 
+{# if tag has no image, use blog image for og tags #}
+{% if tag.image %}
+  {% set ogImage = tag.image.url %}
+{% else %} 
+  {% set ogImage = data.blog.image.url %}
+{% endif %}
+
 {% block head %}
-    {{
-      macros.metadata(
-        title = tag.metaTitle,
-        description = tag.metaDescription,
-        url = process.env.SITE_URL + page.url,
-        siteName = data.blog.name,
-        image=tag.image.url
-      )
-    }}
+  {{
+    macros.metadata(
+      title = tag.metaTitle,
+      description = tag.metaDescription,
+      url = process.env.SITE_URL + page.url,
+      siteName = data.blog.name,
+      image=ogImage
+    )
+  }}
 {% endblock %}
 
 {% block content %}
   <section class="container mx-auto my-4">
-    <h1 class="inline-block text-4xl font-bold py-2 px-4 my-2">
-      {{ tag.name }}
-    </h1>
-    {% if tag.description %}
-      <p class="py-2 px-4 text-gray-800">{{ tag.description | safe }}</p>
-    {% endif %}
+    <div class="px-5">
+      <h1 class="inline-block text-2xl font-bold">
+        {{ tag.name }}
+      </h1>
+      {% if tag.description %}
+        <p class="text-gray-800">{{ tag.description | safe }}</p>
+      {% endif %}
+    </div>
     <div class="flex flex-wrap">
       {% for item in tag.posts %}
         <div class="w-full md:w-1/3 px-5 py-8">

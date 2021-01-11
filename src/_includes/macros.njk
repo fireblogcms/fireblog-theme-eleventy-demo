@@ -19,3 +19,11 @@
   https://developers.facebook.com/tools/debug/sharing/
   #}
 {% endmacro %}
+
+{% macro tags(tags) %}
+  {% for tag in tags %}
+    <a href="/tag/{{ tag.slug }}" class="inline-block text-sm bg-gray-100 hover:bg-gray-300 text-gray-700 rounded py-1 px-2 mr-1">
+      {{ tag.name }}
+    </a>
+  {% endfor %}
+{% endmacro %}

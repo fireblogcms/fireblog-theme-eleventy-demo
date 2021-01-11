@@ -1,3 +1,4 @@
+{% import "macros.njk" as macros %}
 <!DOCTYPE html>
 <html lang="{{ config.lang }}" class="no-js">
 
@@ -71,7 +72,7 @@
         
     <section class="container mx-auto px-4">
       <div class="my-10">
-        <h3 class="text-xl font-bold mb-3">{{ config.followUsText }}</h3>
+        <h3 class="text-xl font-bold mb-3 text-gray-800">{{ config.followUsText }}</h3>
         <ul class="flex items-center">
           {% if config.socials.linkedin %}
             <li class="w-6 md:w-10 mx-1">
@@ -106,14 +107,13 @@
       </div>
     </section>
 
+
     {% if data.tags.length > 0 %}
     <section class="container mx-auto px-4">
       <div class="my-10">
-        <h3 class="text-xl font-bold mb-3">{{ config.tagsText }}</h3>
+        <h3 class="text-xl font-bold mb-3 text-gray-800">{{ config.tagsText }}</h3>
         <div class="layout-tags">
-          {% for tag in data.tags %}
-            <a href="/tag/{{ tag.slug }}" class="inline-block text-sm bg-gray-300 hover:bg-gray-700 hover:text-white text-gray-800 rounded-full py-2 px-4 mr-1">{{ tag.name }}</a>
-          {% endfor %}
+            {{macros.tags(data.tags)}}
         </div>
       </div>
     </section>

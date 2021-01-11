@@ -32,9 +32,19 @@ permalink: "{% if pagination.pageNumber > 0 %}/pages/{{ pagination.pageNumber + 
           <a href="/post/{{ item.slug }}/">
             <img class="w-full rounded-xl" src="{{ item.imagePostList.url }}" alt="" loading="lazy">
           </a>
-          <h2 class="text-2xl font-bold leading-7 my-4">
+          
+          {% if item.tags.length > 0 %}
+            <div class="my-4">
+              {{ macros.tags(item.tags) }}
+            </div>
+          {% endif %}
+
+          <h2 class="text-2xl font-bold leading-7 mt-2">
             <a href="/post/{{ item.slug }}/">{{ item.title }}</a>
           </h2>
+          <div class="mt-4 text-gray-700">
+            {{ item.teaser }}
+          </div>
           <div class="flex items-center text-sm text-gray-600">
             <span class="mr-1">
               <svg stroke="#718096" fill="#718096" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -42,9 +52,6 @@ permalink: "{% if pagination.pageNumber > 0 %}/pages/{{ pagination.pageNumber + 
               </svg>
             </span>
             <span>{{ item.publishedAt | date_to_long_string }}</span>
-          </div>
-          <div class="mt-4 text-gray-700">
-            {{ item.teaser }}
           </div>
         </div>
       {% endfor %}

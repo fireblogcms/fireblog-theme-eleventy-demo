@@ -64,7 +64,7 @@ module.exports = async () => {
   console.log(`Fetching featured posts`);
   data.carouselPosts = await getFeaturedPosts(process.env.BLOG_ID);
 
-  // filter only tags with posts
+  // group posts by tags.
   data.tags = data.tags.reduce((accumulator, tag) => {
     const posts = data.posts.filter(
       post => !!post.tags.find(t => t.slug === tag.slug)

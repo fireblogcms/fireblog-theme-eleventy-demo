@@ -37,6 +37,7 @@ async function getBlog(id) {
     },
     query: `query getBlog($id: ID!) {
       blog(filter: { _id: { eq: $id } }) {
+        _id
         name
         description
         image {
@@ -63,8 +64,12 @@ async function getPosts({ limit, skip, filter }) {
         title
         content
         tags {
+          _id
           name
           slug
+          image {
+            url
+          }
         }
         publishedAt
         updatedAt
@@ -111,6 +116,9 @@ async function getTags(blogId) {
         description
         metaTitle
         metaDescription
+        image {
+          url
+        }
       }
     }`,
   });
