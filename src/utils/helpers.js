@@ -140,5 +140,5 @@ async function getFeaturedPosts(blogId) {
         }
     `,
   });
-  return response.data.featuredPosts;
+  return response.data.posts;
 }

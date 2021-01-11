@@ -3,7 +3,6 @@ const {
   getBlog,
   getTags,
   getFeaturedPosts,
-  graphql,
   getPostsCount,
 } = require('../utils/helpers');
 require('dotenv').config();
@@ -63,7 +62,7 @@ module.exports = async () => {
 
   // fetching featured posts
   console.log(`Fetching featured posts`);
-  data.carouselPosts = getFeaturedPosts(process.env.BLOG_ID);
+  data.carouselPosts = await getFeaturedPosts(process.env.BLOG_ID);
 
   // filter only tags with posts
   data.tags = data.tags.reduce((accumulator, tag) => {
