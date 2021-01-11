@@ -4,6 +4,9 @@ module.exports = {
   graphql,
   getBlog,
   getPosts,
+  getTags,
+  getFeaturedPosts,
+  getPostsCount,
 };
 
 async function graphql({ query, variables }) {
@@ -20,13 +23,14 @@ async function graphql({ query, variables }) {
   });
   response = await response.json();
   if (response.errors) {
-    console.log('❌ GraphQL Error: ', response.errors);
+    console.log('GraphQL Error:');
+    throw new Error(JSON.stringify(response.errors, 0, 2));
   }
   return response;
 }
 
-function getBlog(id) {
-  return graphql({
+async function getBlog(id) {
+  const response = await graphql({
     variables: {
       id,
       siteUrl: process.env.SITE_URL,
@@ -41,10 +45,11 @@ function getBlog(id) {
       }
     }`,
   });
+  return response.data.blog;
 }
 
 async function getPosts({ limit, skip, filter }) {
-  return graphql({
+  const response = await graphql({
     variables: {
       limit,
       skip,
@@ -57,6 +62,10 @@ async function getPosts({ limit, skip, filter }) {
         slug
         title
         content
+        tags {
+          name
+          slug
+        }
         publishedAt
         updatedAt
         image(auto:[compress,format]) {
@@ -74,4 +83,62 @@ async function getPosts({ limit, skip, filter }) {
       }
     }`,
   });
+  return response.data.posts;
+}
+
+async function getPostsCount(filter) {
+  const response = await graphql({
+    variables: { filter },
+    query: `
+      query postsCount($filter: PostFilter) {
+          postsCount(filter: $filter)
+        }
+    `,
+  });
+  return response.data.postsCount;
+}
+
+async function getTags(blogId) {
+  const response = await graphql({
+    variables: {
+      blogId,
+    },
+    query: `query getTags($blogId: ID!) {
+      tags(limit: 100, filter: { blog: { eq: $blogId } } ) {
+        _id
+        name
+        slug
+        description
+        metaTitle
+        metaDescription
+      }
+    }`,
+  });
+  return response.data.tags;
+}
+
+async function getFeaturedPosts(blogId) {
+  const response = await graphql({
+    variables: {
+      filter: { featured: true, blog: { eq: blogId } },
+    },
+    query: `
+      query featuredPosts($filter: PostFilter) {
+          posts(limit: 4, filter: $filter) {
+            _id
+            slug
+            title
+            teaser
+            publishedAt
+            imagePostCarousel:image(w:1200, h:600, fit:crop, auto:[compress,format]) {
+              url
+            }
+            imagePostCarouselThumbnail:image(w:100, h:100, fit:crop, auto:[compress,format]) {
+              url
+            }
+          }
+        }
+    `,
+  });
+  return response.data.featuredPosts;
 }

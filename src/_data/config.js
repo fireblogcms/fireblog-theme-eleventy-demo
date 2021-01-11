@@ -15,6 +15,8 @@ module.exports = {
   ],
   recentPostsText: 'Recent Posts',
   followUsText: 'Follow Us',
+  tagsText: 'Discover topics',
+
   // links to your social accounts.
   // Use an empty string as value to disable a specific social network
   socials: {
