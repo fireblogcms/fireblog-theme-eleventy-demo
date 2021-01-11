@@ -70,8 +70,8 @@
     </main>
         
     <section class="container mx-auto px-4">
-      <div class="my-10 flex justify-between items-center">
-        <h3 class="text-xl font-bold">{{ config.followUsText }}</h3>
+      <div class="my-10">
+        <h3 class="text-xl font-bold mb-3">{{ config.followUsText }}</h3>
         <ul class="flex items-center">
           {% if config.socials.linkedin %}
             <li class="w-6 md:w-10 mx-1">
@@ -108,11 +108,11 @@
 
     {% if data.tags.length > 0 %}
     <section class="container mx-auto px-4">
-      <div class="my-10 flex flex-col md:flex-row justify-between md:items-center">
-        <h3 class="text-xl font-bold">{{ config.tagsText }}</h3>
+      <div class="my-10">
+        <h3 class="text-xl font-bold mb-3">{{ config.tagsText }}</h3>
         <div class="layout-tags">
           {% for tag in data.tags %}
-            <a href="/tag/{{ tag.slug }}" class="inline-block text-sm bg-gray-300 hover:bg-primary text-gray-800 rounded-full py-2 px-4 my-2">{{ tag.name }}</a>
+            <a href="/tag/{{ tag.slug }}" class="inline-block text-sm bg-gray-300 hover:bg-gray-700 hover:text-white text-gray-800 rounded-full py-2 px-4 mr-1">{{ tag.name }}</a>
           {% endfor %}
         </div>
       </div>
