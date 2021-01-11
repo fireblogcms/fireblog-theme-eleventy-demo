@@ -9,3 +9,14 @@
   FIREBLOG_GRAPHQL_ENDPOINT = "Fireblog GraphQL Endpoint"
   BLOG_ID = "Fireblog blog id"
   SITE_URL = "Absolute site url"
+
+[build.processing.html]
+  pretty_urls = true
+
+# redirect permanently your secondary domain name to primary domain name
+# [[redirects]]
+#  from = "https://{{YOUR_APP}}.netlify.com"
+#  to = "https://{{YOUR_DOMAIN}}"
+#  status = 301
+#  force = true # COMMENT: ensure that we always redirect
+
