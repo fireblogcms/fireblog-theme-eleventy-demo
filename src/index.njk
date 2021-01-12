@@ -4,6 +4,7 @@ pagination:
     size: 18
 permalink: "{% if pagination.pageNumber > 0 %}/pages/{{ pagination.pageNumber + 1}}{% endif %}/index.html"
 ---
+
 {% extends 'layout.njk' %}
 {% import "macros.njk" as macros %}
 
@@ -22,7 +23,7 @@ permalink: "{% if pagination.pageNumber > 0 %}/pages/{{ pagination.pageNumber + 
 {% block content %}
 
   {% if data.carouselPosts | length > 0 %}
-   {% include "carousel.njk" %}
+    {{ macros.carousel(data.carouselPosts) }}
   {% endif %}
 
   <section class="container mx-auto my-4">
@@ -31,23 +32,10 @@ permalink: "{% if pagination.pageNumber > 0 %}/pages/{{ pagination.pageNumber + 
     </div>
 
     {% if pagination.hrefs | length > 1 %}
-      <nav role="navigation" aria-label="pagination">
-        <ul class="pt-10 pb-4 flex justify-center">
-          {% for pagenumber in pagination.hrefs %}
-            <li class="w-10 h-10 flex items-center justify-center rounded-full{% if page.url == pagenumber %} bg-primary{% endif %}">
-              <a
-                class="text-2xl font-bold{% if page.url != pagenumber %} text-primary{% endif %}{% if page.url == pagenumber %} text-white{% endif %}"
-                aria-label="{% if page.url == pagenumber %}Page {{ loop.index }}{% else %}Goto page {{ loop.index }}{% endif %}"
-                href="{{ pagenumber }}"
-              >
-                {{ loop.index }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </nav>
+      {{ macros.pagination(pagination) }}
     {% endif %}
   </section>
+
 {% endblock %}
 
 
