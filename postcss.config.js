@@ -1,3 +1,4 @@
+// postCss plugin to remove unused CSS
 const purgecss = require('@fullhuman/postcss-purgecss')({
   content: ['./_site/**/*.html'],
   defaultExtractor: content => {
@@ -11,15 +12,18 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     /^(?!(|.*?:)cursor-move).+-move$/,
   ],
 });
+
+// PostCss plugin to minify your CSS
 const postcssclean = require('postcss-clean')({
   level: 1,
 });
 
+const plugins = [require('tailwindcss'), require('autoprefixer')];
+
+if (process.env.ELEVENTY_ENV === 'PRODUCTION') {
+  postcssclean, purgecss;
+}
+
 module.exports = {
-  plugins: [
-    require('tailwindcss'),
-    require('autoprefixer'),
-    ...(process.env.ELEVENTY_ENV === 'production' ? [postcssclean] : []),
-    ...(process.env.ELEVENTY_ENV === 'production' ? [purgecss] : []),
-  ],
+  plugins,
 };
